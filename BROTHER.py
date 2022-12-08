@@ -85,7 +85,7 @@ def intro():
 
 def messaging(pnmbr, mesg, thr, tmin):
     try:
-        pywhatkit.sendwhatmsg(pnmbr, mesg, thr, tmin)
+        pywhatkit.sendwhatmsg(pnmbr, mesg, thr, tmin) #time must be in 24 hour format
     except Exception:
         pass
 
@@ -97,6 +97,7 @@ def integer(val):
         
     except Exception:
         speak("Sorry, I didn't got that.")
+        speak("Please re-initialize the command for me sir.")
 
 # generates random password according to the given length by the user
 def password():
@@ -166,7 +167,7 @@ def autoemail():
         pass
 
 def zonal():
-    speak("Hello Everyone! Welcome to this very auspicious day.")
+    speak("Hello Everyone! Welcome to this very auspicious day. By the way, I am sorry for forgetting my ettiquetes. Let me introduce myself to you.")
     intro()
 
 # def document(title, text):
@@ -186,7 +187,7 @@ def calling_everything():
                 while True:
                     statement = get_command().lower()
                     # now tasks to be done
-                    l1 = ['wikipedia', 'google', 'internet', 'bing','net']
+                    l1 = ['wikipedia', 'on google', 'internet', 'bing','net']
                     for browse in l1:
                         if browse in statement:
                             speak(f'Fetching from {browse}')
@@ -197,12 +198,17 @@ def calling_everything():
                             speak(answer)
 
                     if('open youtube' in statement):
+                        speak("Opening Youtube")
                         webbrowser.open("youtube.com")
+     
+                    elif('open google' in statement.lower() or 'open google.com' in statement.lower()):
+                        speak("Opening Google")
+                        webbrowser.open("google.com")
 
-                    elif('what can you do' in statement or 'what are your capabilities' in statement or 'what are the tasks you can perform' in statement or 'what are the tasks you can do' in statement):
+                    elif('what can you do' in statement or 'what you can do' in statement or 'what are your capabilities' in statement or 'what are the tasks you can perform' in statement or 'what are the tasks you can do' in statement or 'what are the task you can do' in statement or 'what are the task you can perform' in statement or 'what are your capability' in statement):
                         speak("I can perform a lot of works like I can send email or whatsapp messages. Open basic apps like google, notepad, youtube, MS Word. Play music. I can generate a random and super strong password for you. And if you've got bored, you can talk with me, that would be pleasure for me.")
 
-                    elif 'greet everyone' in statement or 'say hello to them' in statement or 'say hello' in statement or 'greet them all' in statement or 'say hello to everyone' in statement:
+                    elif 'greet everyone' in statement or 'say hello to them' in statement or 'say hello' in statement or 'greet them all' in statement or 'say hello to everyone' in statement or 'greet them' in statement or "don't you know them" in statement:
                         zonal()
 
                     elif("email" in statement):
@@ -210,12 +216,9 @@ def calling_everything():
                         speak("Automating the email process...")
                         autoemail()
 
-                    elif('open google' in statement):
-                        webbrowser.open("google.com")
-
                     elif 'open notepad' in statement or 'notepad' in statement:
                         speak("opening notepad!")
-                        notepad = 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Notepad'
+                        notepad = 'C:\\Windows\\Notepad'
                         os.startfile(notepad)
 
                     
@@ -227,23 +230,32 @@ def calling_everything():
                     elif("time right now" in statement or 'time now' in statement):
                         speak(samay)
 
-                    elif("send message" in statement or 'whatsapp' in statement or 'send a message' in statement):
+                    elif("send message" in statement or 'whatsapp' in statement or "WhatsApp" in statement or 'send a message' in statement):
                         try:
                             speak("Tell me the phone number to whom you want to send message")
                             nbr = get_command()
                             phnmbr = '+91' + nbr
                             speak("What's the message?")
                             msg = get_command()
+                            #time must be in 24 hour format
                             speak("At what hour")
                             hr = get_command()
                             k1 = integer(hr)
-                            speak("and at what minutes?")
-                            mint = get_command()
-                            k2 = integer(mint)
-                            speak("Okay, all set, Sending Your Message.....")
-                            messaging(phnmbr, msg, k1, k2)
+                            if(type(k1) == int): 
+                                speak("and at what minutes?")
+                                mint = get_command()
+                                k2 = integer(mint)
+                                if(type(k2)==int):
+                                    speak("Okay, all set, Composing your message sir.....")
+                                    messaging(phnmbr, msg, k1, k2)
+                                    speak("message sent, sir!")
                         except Exception:
                             pass
+
+                    elif("automate the process again" in statement or "do it again" in statement):
+                        speak("Okay, reinitializing")
+                        speak("Tell me the command!")
+                        get_command()
 
                     elif('password' in statement):
                         password()
@@ -267,7 +279,7 @@ def calling_everything():
                     elif 'thank you' in statement:
                         speak("oh! there isn't any need for thanks. Well it's my pleasure to assist you!")
 
-                    elif "what's your age" in statement or "how old are you" in statement:
+                    elif "what's your age" in statement or 'what is your age' in statement or "how old are you" in statement:
                         speak("Oh sir! I have been initialized a few moments ago.")
 
                     elif 'what are you doing' in statement or "what's going on" in statement or "what's up" in statement:
