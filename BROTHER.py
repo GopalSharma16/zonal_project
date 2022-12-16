@@ -266,7 +266,7 @@ def calling_everything():
                         os.startfile(word)
 
                     elif 'do you know them' in statement or 'who are they' in statement:
-                        speak("They are respected dignatories!")
+                        speak("Yes, they are respected dignatories!")
 
                     elif 'how are you' in statement:
                         speak("I am totally fine, tell me about you that how You are?")
